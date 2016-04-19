@@ -73,18 +73,18 @@ class UserDashboard < Administrate::BaseDashboard
     #:reset_password_token,
     #:reset_password_sent_at,
     #:remember_created_at,
-    :sign_in_count,
-    :current_sign_in_at,
-    :last_sign_in_at,
-    :current_sign_in_ip,
-    :last_sign_in_ip,
+    #:sign_in_count,
+    #:current_sign_in_at,
+    #:last_sign_in_at,
+    #:current_sign_in_ip,
+    #:last_sign_in_ip,
 
   ]
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    "#{user.email} (#{user.name})"
+  end
 end

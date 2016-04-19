@@ -30,13 +30,29 @@ module Admin
         end
 
         def edit
-            if requested_resource.vendor_id == current_user.vendor_id
+            if vendor_match?
                 render locals: {
                     page: Administrate::Page::Form.new(dashboard, requested_resource),
                 }
             else
                 redirect_to :back, :alert => "Access denied."
             end
+        end
+
+        def destroy
+            if vendor_match?
+                requested_resource.destroy
+                flash[:notice] = translate_with_resource("destroy.success")
+                redirect_to action: :index
+            else
+                redirect_to :back, :alert => "Access denied."
+            end
+        end
+
+        private
+
+        def  vendor_match?
+            requested_resource.vendor_id == current_user.vendor_id
         end
 
         # Define a custom finder by overriding the `find_resource` method:
