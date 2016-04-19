@@ -39,6 +39,29 @@ module Admin
             end
         end
 
+        def update
+            puts "========== update"
+
+            # if no password entered, don't update password
+            if resource_params["password"].empty?
+                rc = requested_resource.update_without_password(resource_params)
+            else
+                rc = requested_resource.update(resource_params)
+            end
+
+            if rc
+                redirect_to(
+                [namespace, requested_resource],
+                notice: translate_with_resource("update.success"),
+                )
+            else
+                render :edit, locals: {
+                    page: Administrate::Page::Form.new(dashboard, requested_resource),
+                }
+            end
+        end
+
+
         def destroy
             if vendor_match?
                 requested_resource.destroy
