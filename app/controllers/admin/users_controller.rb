@@ -1,6 +1,6 @@
 module Admin
     class UsersController < Admin::ApplicationController
-        before_action :authenticate_user!
+        before_action :admin_only
 
         # To customize the behavior of this controller,
         # simply overwrite any of the RESTful actions. For example:
@@ -12,6 +12,7 @@ module Admin
         end
 
         def index
+            puts "===== index admin user"
             # search bar data
             search_term = params[:search].to_s.strip
 
@@ -30,6 +31,7 @@ module Admin
         end
 
         def edit
+            puts "====== edit vendor"
             if vendor_match?
                 render locals: {
                     page: Administrate::Page::Form.new(dashboard, requested_resource),
@@ -70,6 +72,10 @@ module Admin
             else
                 redirect_to :back, :alert => "Access denied."
             end
+        end
+
+        def authenticate_admin
+            current_user && current_user.admin?
         end
 
         private

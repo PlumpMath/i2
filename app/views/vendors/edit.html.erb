@@ -1,0 +1,20 @@
+<h1>Edit</h1>
+ 
+<%= form_for @vendor do |f| %>
+<div class="field-unit"
+  <p>
+    <%= f.label :name, :class => "field-unit__label" %><br>
+    <%= f.text_field :name, :class => "field-unit__field" %>
+  </p>
+</div>
+<div class="field-unit"
+  <p>
+    <%= f.label "Packages", :class => "field-unit__label" %><br>
+    <%= f.select :package_ids, Package.all.collect {|x| [ x.name, x.id]}, {} , :multiple => true, :class => "field-unit__field"%>
+  </p>
+</div>
+  
+<div class="form-actions">
+    <%= f.submit %>
+</div>
+<% end %>

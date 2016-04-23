@@ -19,7 +19,13 @@ class UsersController < ApplicationController
     puts "======== new"
   end
 
+  def edit
+    puts "======= edit"
+    super
+  end
+
   def update
+    puts "======= update"
     @user = User.find(params[:id])
     if @user.update_attributes(secure_params)
       redirect_to users_path, :notice => "User updated."

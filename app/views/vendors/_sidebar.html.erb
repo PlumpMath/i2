@@ -1,0 +1,19 @@
+<%#
+# Sidebar
+
+This partial is used to display the sidebar in Administrate.
+By default, the sidebar contains navigation links
+for all resources in the admin dashboard,
+as defined by the routes in the `admin/` namespace
+%>
+
+<ul class="sidebar__list">
+	    <li>
+    <%= link_to("Home",
+       root_path,
+       class: "sidebar__link}") %>
+    </li>
+    <li>
+      <%= link_to("Vendors", vendors_path)%>
+    </li>
+</ul>
