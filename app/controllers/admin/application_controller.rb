@@ -6,14 +6,11 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
-    before_action :authenticate_user!
+    before_action :admin_only
 
-    def authenticate_admin
-      current_user && current_user.admin?
-    end
 
     def admin_only
-      unless current_user.admin?
+      unless current_user && current_user.admin?
         redirect_to :back, :alert => "Access denied."
       end
     end

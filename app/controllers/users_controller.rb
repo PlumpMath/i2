@@ -2,8 +2,14 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only, :except => :show
 
+  # Override DEVISE, and disable everything. All user
+  # methods are run through administrate
+  # routes.rb : devise_for :users
+
   def index
-    @users = User.all
+    puts "====== index users"
+    #@users = User.all
+    redirect_to :back, :alert => "Access denied."
   end
 
   def show
@@ -17,15 +23,17 @@ class UsersController < ApplicationController
 
   def new
     puts "======== new"
+    redirect_to :back, :alert => "Access denied."
   end
 
   def edit
     puts "======= edit"
-    super
+    redirect_to :back, :alert => "Access denied."
   end
 
   def update
     puts "======= update"
+    redirect_to :back, :alert => "Access denied."
     @user = User.find(params[:id])
     if @user.update_attributes(secure_params)
       redirect_to users_path, :notice => "User updated."
@@ -35,6 +43,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    puts "==== destroy"
+    redirect_to :back, :alert => "Access denied."
     user = User.find(params[:id])
     user.destroy
     redirect_to users_path, :notice => "User deleted."

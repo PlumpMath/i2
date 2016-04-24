@@ -1,4 +1,13 @@
 module Admin
+#
+# override in routes.rb to call this
+#   namespace :admin do
+#        resources :users
+#        root to: "users#index"
+#    end
+#
+# TODO : refactor to change from user, which is confusing
+#
     class UsersController < Admin::ApplicationController
         before_action :admin_only
 
