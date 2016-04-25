@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419125414) do
+ActiveRecord::Schema.define(version: 20160424232548) do
 
   create_table "message", primary_key: "message_id", force: :cascade do |t|
     t.string  "name",                limit: 80,                         null: false
@@ -69,9 +69,10 @@ ActiveRecord::Schema.define(version: 20160419125414) do
   add_index "test_seq_step", ["test_sequence_id"], name: "test_seq_step_test_seq", using: :btree
 
   create_table "test_sequence", primary_key: "test_sequence_id", force: :cascade do |t|
-    t.string "name",        limit: 40,                          null: false
-    t.string "description", limit: 1024
-    t.string "type",        limit: 12,   default: "standalone", null: false
+    t.string  "name",        limit: 40,                          null: false
+    t.string  "description", limit: 1024
+    t.string  "type",        limit: 12,   default: "standalone", null: false
+    t.integer "user_id",     limit: 4
   end
 
   create_table "users", force: :cascade do |t|
@@ -149,12 +150,6 @@ ActiveRecord::Schema.define(version: 20160419125414) do
 
   add_index "vendor_test_sequences", ["test_sequence_id"], name: "vendor_test_seq_test_seq_id", using: :btree
   add_index "vendor_test_sequences", ["vendor_id"], name: "vendor_test_seq_vendor_id", using: :btree
-
-  create_table "vendors", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   add_foreign_key "message", "package_group", primary_key: "package_group_id", name: "message_package_group_id"
   add_foreign_key "message_log", "message", primary_key: "message_id", name: "message_log_message_id"

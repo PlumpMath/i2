@@ -12,4 +12,5 @@ class User < ActiveRecord::Base
 	:recoverable, :rememberable, :trackable, :validatable
 
 	belongs_to :vendor, :class_name => 'Vendor', :foreign_key => :vendor_id
+	has_many :test_sequences, :class_name => 'TestSequence'
 end
