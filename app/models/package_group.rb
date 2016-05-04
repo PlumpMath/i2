@@ -3,5 +3,5 @@ class PackageGroup < ActiveRecord::Base
     self.primary_key = :package_group_id
 
     has_many :messages, :class_name => 'Message', :foreign_key => :package_group_id
-    belongs_to :package, :class_name => 'Package', :foreign_key => :package_id
+    belongs_to :packages, :class_name => 'Package', :foreign_key => :package_id
 end

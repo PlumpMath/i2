@@ -3,9 +3,49 @@ class TestSequenceController < ApplicationController
 	layout "test_sequence"
 
 	def index
-		byebug
 		puts "===== iii"
-		@tests = TestSequence.where(vendor_id=same_vendor)
+		@tests = TestSequence.joins(:vendor_test_sequence).where(vendor_test_sequences: { vendor_id: same_vendor})
+		#@tests = TestSequence.where(vendor_id=same_vendor)
+	end
+
+	def create
+		@test = TestSequence.new(test_params)
+
+
+		if @test.save
+			@test.vendor_test_sequence.create(:vendor_id => same_vendor, :asynch_flag=> 0)
+			redirect_to test_sequence_index_path
+		else
+			render index
+		end
+	end
+
+	def update
+		byebug
+		@test = TestSequence.find(params[:id])
+
+		if @test.update_attributes(test_params)
+			flash[:success] = "Test Sequence updated"
+			redirect_to test_sequence_index_path
+		else
+			rendor :edit
+		end
+	end
+
+	def edit
+		@test = TestSequence.find(params[:id])
+	end
+
+
+	def destroy
+		@test = TestSequence.find(params[:id])
+		@test.destroy
+
+		redirect_to test_sequence_index_path
+	end
+
+	def show
+		@ts = TestSequence.find(params[:id])
 	end
 
 
@@ -15,8 +55,13 @@ class TestSequenceController < ApplicationController
 		current_user.vendor_id
 	end
 
-	def show
-		@test = TestSequence.find(params[:id])
+	def test_params
+		params.require(:test_sequence).permit(:name, :description, :type)
 	end
+
+	def flashes
+
+	end
+
 
 end
