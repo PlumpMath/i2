@@ -89,6 +89,7 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     high_voltage (3.0.0)
+    htmlbeautifier (1.1.1)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -198,6 +199,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   high_voltage
+  htmlbeautifier
   jbuilder (~> 2.0)
   jquery-rails
   mysql2 (~> 0.3.18)

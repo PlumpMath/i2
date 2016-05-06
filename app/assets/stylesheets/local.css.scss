@@ -3,13 +3,18 @@
   margin-top: 20px;
 }
 
-.i_nav {
-  color: #9d9d9d;
-  padding-top: 15px;
-  padding-bottom: 15px;
+.i_nav li {
+    display: block;
+    padding: 5px 30px;
+    color: #fff;
+    text-decoration: none;
 }
 
 #message_sidebar {
 	max-width: none;
 	margin-top: 51px;
+}
+
+.test_seq_step_field-unit__field {
+	width: 60%;
 }

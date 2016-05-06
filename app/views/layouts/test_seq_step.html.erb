@@ -11,36 +11,32 @@ By default, it renders:
 - Flashes
 - Links to stylesheets and Javascripts
 %>
-
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
-<head>
-  <meta charset="utf-8" />
-  <meta name="ROBOTS" content="NOODP" />
-  <meta name="viewport" content="initial-scale=1" />
-  <title><%= content_for(:title) %> | <%= Rails.application.class.parent_name.titlecase %></title>
-  <%= stylesheet_link_tag "administrate/application", media: "all" %>
-  <%= stylesheet_link_tag "application", media: "all" %>
-  <%= javascript_include_tag 'application' , "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-
-<body>
-  <div class="app-container">
-
-        <div class="sidebar" id="message_sidebar">
-      <%= render "sidebar" -%>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="ROBOTS" content="NOODP" />
+    <meta name="viewport" content="initial-scale=1" />
+    <title><%= title %></title>
+    <%= stylesheet_link_tag "administrate/application", media: "all" %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag 'application' , "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <div class="app-container">
+      <div class="sidebar" id="message_sidebar">
+        <%= render "sidebar" -%>
+      </div>
+      <main class="main-content" role="main">
+        <%= content_for(:search) %>
+        <%= render :template => "layouts/_flashes" -%>
+        <%= yield %>
+      </main>
     </div>
-
-
-    <main class="main-content" role="main">
-      <%= content_for(:search) %>
-      <%= render :template => "layouts/_flashes" -%>
-      <%= yield %>
-    </main>
-
-  </div>
-
-  <%# render "javascript" %>
-</body>
+    <%# render "javascript" %>
+  </body>
 </html>

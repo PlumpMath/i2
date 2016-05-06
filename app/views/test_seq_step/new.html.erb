@@ -6,34 +6,34 @@
 
 <div class="field-unit field-unit--string">
 	<div class="field-unit__label">
- 		<%= f.label :message, :class => "field-unit__label" %>
+ 		<%= f.label :message%>
  	</div>
  	<div class="field-unit__field">
-      <%= f.select :in_message_id, Message.all.collect {|x| [ x.name, x.id]}, {}, :class => "field-unit__field"%>
+      <%= f.select :in_message_id, Message.all.collect {|x| [ x.name, x.id]}, {}%>
     </div>
 </div>
 
 <div class="field-unit field-unit--string">
 	<div class="field-unit__label">
-    	<%= f.label :esb_url, :class => "field-unit__label" %>
+    	<%= f.label :esb_url%>
     </div>
  	<div class="field-unit__field">
-    <%= f.text_field :esb_url, :class => "field-unit__field" %>
+    <%= f.text_field :esb_url%>
   </div>
 </div>
 
 <div class="field-unit field-unit--string">
 	<div class="field-unit__label">
-    	<%= f.label :harness_url, :class => "field-unit__label" %>
+    	<%= f.label :harness_url%>
     </div>
  	<div class="field-unit__field">
-    <%= f.text_field :harness_url, :class => "field-unit__field" %>
+    <%= f.text_field :harness_url%>
   </div>
 </div>
 
 <div class="field-unit field-unit--string">
   <div class="field-unit__label">
-      <%= f.label "Swap Correlation ID", :class => "field-unit__label" %><br>
+      <%= f.label "Swap Correlation ID" %><br>
   </div>
   <div class="field-unit__field">
     <%= f.select(:swap_corrid_flag) do %>

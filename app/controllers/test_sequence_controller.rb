@@ -21,7 +21,6 @@ class TestSequenceController < ApplicationController
 	end
 
 	def update
-		byebug
 		@test = TestSequence.find(params[:id])
 
 		if @test.update_attributes(test_params)
