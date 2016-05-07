@@ -1,14 +1,11 @@
 <h1>Edit Test Sequence Step</h1>
-<div class="sidebar" id="message_sidebar">
-  <%= render "sidebar" -%>
-</div>
 <%= form_for @step do |f| %>
   <div class="field-unit field-unit--string">
     <div class="field-unit__label">
       <%= f.label :message %>
     </div>
     <div class="field-unit__field test_seq_step_field-unit__field">
-      <%= f.select :in_message_id, Message.all.collect {|x| [ x.name, x.id]} %>
+      <input id="msg_read_only" name="msg_ro", type="text" value=<%= Message.find(@step.in_message_id).name %> disabled>
     </div>
   </div>
   <div class="field-unit field-unit--string">

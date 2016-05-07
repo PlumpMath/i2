@@ -28,11 +28,6 @@ By default, it renders:
       <%= render 'layouts/navigation' %>
     </header>
     <div class="app-container">
-      <% if current_page?(new_test_seq_step2_path) %>
-        <div class="sidebar" id="message_sidebar">
-          <%= render "sidebar" -%>
-        </div>
-      <% end %>
       <main class="main-content" role="main">
         <%= content_for(:search) %>
         <%= render :template => "layouts/_flashes" -%>

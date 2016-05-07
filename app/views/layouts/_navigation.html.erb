@@ -4,6 +4,7 @@
     <%= render 'layouts/nav_links_for_auth' %>
   </ul>
   <ul class="nav navbar-nav navbar-right i_nav">
+
     <% if user_signed_in? %>
       <li><%if defined? current_user%><%= current_user.name%><% end %>
         <% if current_user.try(:admin?) %>
@@ -12,4 +13,5 @@
       </li>
     <% end %>
   </ul>
+
 </div>
