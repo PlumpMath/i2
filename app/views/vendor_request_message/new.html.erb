@@ -40,10 +40,10 @@
     </div>
   </div>
   <div class="form-actions">
-    <%= f.submit %>
-    <%= link_to 'Reset Message', '#', :onclick => 'javascript:resetMessageText();', class: "button"%>
+    <%= f.submit "Save" %>
+    <%= link_to 'Default', '#', :onclick => 'javascript:resetMessageText();', class: "button"%>
+    <%= f.submit "Send", formaction: vendor_request_message_index_path %>
   </div>
-
 <% end %>
 <% Message.all.each do |m| %>
   <%= content_tag(:div, m.default_message_txt, id: "message_#{m.message_id}", class: "page_data") %>

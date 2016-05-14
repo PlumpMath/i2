@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	def admin_only
-		unless current_user.admin?
+		unless current_user.admin? or current_user.super?
 			redirect_to :back, :alert => "Access denied."
 		end
 	end

@@ -4,16 +4,17 @@ class TestSequenceController < ApplicationController
 
 	def index
 		puts "===== iii"
-		@tests = TestSequence.joins(:vendor_test_sequence).where(vendor_test_sequences: { vendor_id: same_vendor})
-		#@tests = TestSequence.where(vendor_id=same_vendor)
+		#@tests = TestSequence.joins(:vendor_test_sequence).where(vendor_test_sequences: { vendor_id: same_vendor})
+		@tests = TestSequence.all
+
 	end
 
 	def create
 		@test = TestSequence.new(test_params)
-
+		@test.user = current_user
 
 		if @test.save
-			@test.vendor_test_sequence.create(:vendor_id => same_vendor, :asynch_flag=> 0)
+			#@test.vendor_test_sequence.create(:vendor_id => same_vendor, :asynch_flag=> 0)
 			redirect_to test_sequence_index_path
 		else
 			render index
@@ -50,9 +51,9 @@ class TestSequenceController < ApplicationController
 
 	private
 
-	def same_vendor
-		current_user.vendor_id
-	end
+	#def same_vendor
+	#	current_user.vendor_id
+	#end
 
 	def test_params
 		params.require(:test_sequence).permit(:name, :description, :type)

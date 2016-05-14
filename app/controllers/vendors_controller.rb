@@ -1,6 +1,8 @@
 # Vendor CRUD, forms located under
 # app/views/vendors dir
 class VendorsController < ApplicationController
+	before_action :authenticate_user!
+	before_action :super_only
 
 	# user app/views/vendors
 	layout "vendors"
@@ -31,7 +33,7 @@ class VendorsController < ApplicationController
 
 	def update
 		@vendor = Vendor.find(params[:id])
-		
+
 		# kill all linked vendor_packages, and then recreate
 		@vendor.packages.destroy_all
 		@vendor.packages << Package.find(params[:vendor][:package_ids].reject { |c| c.empty? })
@@ -54,6 +56,7 @@ class VendorsController < ApplicationController
 
 
 	private
+
 	def vendor_params
 		params.require(:vendor).permit(:name)
 	end

@@ -10,10 +10,17 @@ module Admin
 
 
     def admin_only
-      unless current_user && current_user.admin?
+      unless current_user && (current_user.admin? || current_user.super?)
         redirect_to :back, :alert => "Access denied."
       end
     end
+
+    def super_only
+      unless current_user && current_user.super?
+        redirect_to :back, :alert => "Access denied."
+      end
+    end
+
 
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.

@@ -50,10 +50,9 @@ class UsersController < ApplicationController
     redirect_to users_path, :notice => "User deleted."
   end
 
-  private
 
   def admin_only
-    unless current_user.admin?
+    unless current_user.admin? || current_user.super?
       redirect_to :back, :alert => "Access denied."
     end
   end

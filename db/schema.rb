@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424232548) do
+ActiveRecord::Schema.define(version: 20160508163842) do
 
   create_table "message", primary_key: "message_id", force: :cascade do |t|
     t.string  "name",                limit: 80,                         null: false
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 20160424232548) do
     t.integer "user_id",     limit: 4
   end
 
+  add_index "test_sequence", ["user_id"], name: "fk_rails_eaa7c84af2", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -112,10 +114,12 @@ ActiveRecord::Schema.define(version: 20160424232548) do
   add_index "vendor_packages", ["package_id"], name: "vendor_package_package_id", using: :btree
   add_index "vendor_packages", ["vendor_id"], name: "vendor_package_vendor_id", using: :btree
 
-  create_table "vendor_request_message", primary_key: "vendor_recent_message_id", force: :cascade do |t|
+  create_table "vendor_request_message", primary_key: "vendor_request_message_id", force: :cascade do |t|
     t.integer "vendor_id",   limit: 4,          null: false
     t.integer "message_id",  limit: 4,          null: false
     t.text    "message_txt", limit: 4294967295, null: false
+    t.string  "sent_to_url", limit: 500
+    t.string  "description", limit: 512
   end
 
   add_index "vendor_request_message", ["message_id"], name: "vendor_request_message_message_id", using: :btree
@@ -157,6 +161,7 @@ ActiveRecord::Schema.define(version: 20160424232548) do
   add_foreign_key "test_seq_step", "message", column: "in_message_id", primary_key: "message_id", name: "test_steps_in_message_id"
   add_foreign_key "test_seq_step", "test_seq_step", column: "next_step_id", primary_key: "test_seq_step_id", name: "test_steps_next_step_id"
   add_foreign_key "test_seq_step", "test_sequence", primary_key: "test_sequence_id", name: "test_seq_step_test_seq"
+  add_foreign_key "test_sequence", "users"
   add_foreign_key "vendor_packages", "package", primary_key: "package_id", name: "vendor_package_package_id"
   add_foreign_key "vendor_packages", "vendor", primary_key: "vendor_id", name: "vendor_package_vendor_id"
   add_foreign_key "vendor_request_message", "message", primary_key: "message_id", name: "vendor_request_message_message_id"

@@ -20,7 +20,7 @@ By default, it renders:
     <title><%= title %></title>
     <%= stylesheet_link_tag "administrate/application", media: "all" %>
     <%= stylesheet_link_tag "application", media: "all" %>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'application' , "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -30,7 +30,7 @@ By default, it renders:
     <div class="app-container">
       <main class="main-content" role="main">
         <%= content_for(:search) %>
-        <%= render "flashes" -%>
+        <%= render :template => "layouts/_flashes" -%>
         <%= yield %>
       </main>
     </div>

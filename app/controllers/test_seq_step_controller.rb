@@ -25,6 +25,13 @@ class TestSeqStepController < ApplicationController
 		render json: a.to_json
 	end
 
+	def destroy
+		@step = TestSeqStep.find(params[:id])
+		@step.destroy
+
+		redirect_to edit_test_sequence_path(:id => @step.test_sequence_id)
+	end
+
 
 
 	def show

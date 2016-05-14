@@ -10,8 +10,9 @@ Rails.application.routes.draw do
 	resources :users
 	resources :vendors
 	resources :test_sequence
+	resources :message_log
 
-	get 'vendor_request_message/message/:id' => 'vendor_request_message#message'
+	get 'vendor_request_message/:id/sendRequest' => 'vendor_request_message#sendRequest', as: 'sendRequest_vendor_request_message'
 	resources :vendor_request_message
 
 	get 'test_seq_step/packages' => 'test_seq_step#packages'

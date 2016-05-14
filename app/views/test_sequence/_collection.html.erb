@@ -3,6 +3,7 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>Created by</th>
       <th>Type</th>
       <th>Description</th>
       <th></th>
@@ -16,6 +17,7 @@
           >
           <td><%= test.id %></td>
           <td><%= test.name %></td>
+          <td><%= test.user_name %> </td>
           <td><%= test.type %></td>
           <td><%= test.description %></td>
           <td><%= link_to(
@@ -30,3 +32,4 @@
       <% end %>
     </tbody>
   </table>
+</table>
