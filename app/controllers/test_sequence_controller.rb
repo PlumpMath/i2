@@ -17,7 +17,7 @@ class TestSequenceController < ApplicationController
 			#@test.vendor_test_sequence.create(:vendor_id => same_vendor, :asynch_flag=> 0)
 			redirect_to test_sequence_index_path
 		else
-			render index
+			render test_sequence_index_path
 		end
 	end
 
