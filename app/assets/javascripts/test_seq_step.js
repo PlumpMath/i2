@@ -1,4 +1,4 @@
-$.getJSON('../packages', function(data) {
+$.getJSON('/test_seq_step/packages', function(data) {
 	var tree = data;
 	$('#message_tree').treeview({
 		data: tree,

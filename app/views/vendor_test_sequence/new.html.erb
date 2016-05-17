@@ -12,7 +12,7 @@
     </div>
     <div class="field-unit__field">
       <%= f.select :test_sequence_id, TestSequence.all.collect {|x| [ x.name, x.id]}, {},
-      :onChange => "javascript:setMessageText($(this).val())"%>
+      :onChange => "javascript:setTextSequenceName($(this).val())"%>
     </div>
   </div>
   <div class="field-unit field-unit--string">
