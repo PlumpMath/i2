@@ -4,6 +4,7 @@
   <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Org Name</th>
     <th>Packages</th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
           >
         <td><%= vendor.id %></td>
         <td><%= vendor.name %></td>
+         <td><%= vendor.org_name %></td>
         <td><%= vendor.packages.map { |p| p.name }.join(", ") %></td>
 
         <td><%= link_to(

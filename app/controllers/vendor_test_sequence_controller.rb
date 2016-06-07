@@ -44,7 +44,11 @@ class VendorTestSequenceController < ApplicationController
 
 	def edit
 		@test = VendorTestSequence.find(params[:id])
-		@vendor_url = @test.vendor_test_seq_steps.first.out_url
+		if @test.vendor_test_seq_steps.present?
+			@vendor_url = @test.vendor_test_seq_steps.first.out_url
+		else
+			@vendor_url = ''
+		end
 	end
 
 	def destroy
