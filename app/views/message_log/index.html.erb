@@ -17,8 +17,10 @@ By default, it renders:
       <th>ID</th>
       <th>Name</th>
       <th>Create Date</th>
+      <th>Stage</th>
       <th>Result</th>
-      <th></th>
+      <th>Message ID</th>
+      <th>Correlation ID</th>
       <th></th>
     </tr>
     <tbody>
@@ -28,11 +30,15 @@ By default, it renders:
           tabindex="0"
           >
           <td><%= log.message_log_id %></td>
-          <td><%= log.message.name %></td>
+          <td><%= link_to log.message.name, message_log_path(log) %>.</td>
           <td><%= log.create_date %> </td>
+          <td><%= log.stage %> </td>
           <td><%= log.resultCode %></td>
-          <td></td>
-          <td></td>
+          <td><%= log.messageId %></td>
+          <td><%= log.correlationID %></td>
+          <td><%= link_to 'Destroy', message_log_path(log),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>

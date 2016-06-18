@@ -58,7 +58,7 @@ class VendorsController < ApplicationController
 	private
 
 	def vendor_params
-		params.require(:vendor).permit(:name)
+		params.require(:vendor).permit(:name, :default_url)
 	end
 
 	def flashes

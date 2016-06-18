@@ -5,6 +5,7 @@
     <th>ID</th>
     <th>Name</th>
     <th>Packages</th>
+    <th>URL</th>
     <th></th>
     <th></th>
   </tr>
@@ -18,6 +19,7 @@
         <td><%= vendor.id %></td>
         <td><%= vendor.name %></td>
         <td><%= vendor.packages.map { |p| p.name }.join(", ") %></td>
+        <td><%= vendor.default_url %></td>
 
         <td><%= link_to(
           t("actions.edit"),
