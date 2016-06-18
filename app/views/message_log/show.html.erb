@@ -1,3 +1,10 @@
+<h1><%= @page_title %></h1>
+<header class="header">
+  <h1 class="header__heading" id="page-title"><%= content_for(:title) %></h1>
+  <div class="header__actions">
+    <td><%= link_to 'Back', :back, class: "button" %></td>
+  </div>
+</header>
 <h3>Message</h3>
 <p>ID: <%= @log.message_log_id%></p>
 <p>Message Name: <%= @log.message.name %></p>

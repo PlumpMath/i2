@@ -4,7 +4,7 @@
   <tr>
     <th>ID</th>
     <th>Name</th>
-    <th>Org Name</th>
+    <th>Default URL</th>
     <th>Packages</th>
     <th>URL</th>
     <th></th>
@@ -19,7 +19,7 @@
           >
         <td><%= vendor.id %></td>
         <td><%= vendor.name %></td>
-         <td><%= vendor.org_name %></td>
+         <td><%= vendor.default_url %></td>
         <td><%= vendor.packages.map { |p| p.name }.join(", ") %></td>
         <td><%= vendor.default_url %></td>
 
