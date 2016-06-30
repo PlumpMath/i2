@@ -31,7 +31,11 @@ class VendorRequestMessageController < ApplicationController
   end
 
   def update
+
+    puts "======== update called"
     @message = VendorRequestMessage.find(params[:id])
+
+    cmd = params[:commit]
 
     if @message.update_attributes(test_params)
       sendMessage()
@@ -56,7 +60,22 @@ class VendorRequestMessageController < ApplicationController
   private
 
   def sendMessage
+
+
     if params[:commit] == 'Send'
+      puts "========= url : " + @message.sent_to_url
+      puts "========= message : " + @message.message_txt
+
+      uri = URI.parse @message.sent_to_url
+
+      http = Net::HTTP.new(uri.host, uri.port)
+
+      req = Net::HTTP::Post.new(uri.request_uri)
+      req.body = @message.message_txt
+      req.content_type = 'text/xml'
+
+      response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request req}
+
       flash[:success] = "Request saved. Send not implemented"
       redirect_to vendor_request_message_index_path
     else
