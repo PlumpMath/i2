@@ -2,6 +2,9 @@ class VendorRequestMessageController < ApplicationController
 
   layout "vendor_request_message"
 
+  require "rexml/document" 
+  require 'ostruct'
+
   def index
     @messages = VendorRequestMessage.where(vendor_id: same_vendor)
   end
@@ -24,23 +27,30 @@ class VendorRequestMessageController < ApplicationController
     redirect_to vendor_request_message_index_path
   end
 
-
+  def results
+    @message = VendorRequestMessage.find(params[:id])
+    render :results
+  end
 
   def show
     @ts = VendorRequestMessage.find(params[:id])
+    render :results
   end
 
   def update
-
     puts "======== update called"
     @message = VendorRequestMessage.find(params[:id])
 
     cmd = params[:commit]
 
-    if @message.update_attributes(test_params)
+    if cmd == "Send"
       sendMessage()
     else
-      render :edit
+      if @message.update_attributes(test_params)
+        sendMessage()
+      else
+        render :edit
+      end
     end
   end
 
@@ -50,34 +60,57 @@ class VendorRequestMessageController < ApplicationController
   end
 
   def sendRequest
+    byebug
     @page_title = 'Send Request Message'
     @message = VendorRequestMessage.find(params[:id])
-    render :edit
+    render :send
   end
 
 
 
   private
 
+  def formatXML(message)
+    response = "";
+
+    doc = REXML::Document.new(message)
+    formatter = REXML::Formatters::Pretty.new
+    formatter.compact = true
+
+    formatter.write(doc, response)
+    return response
+  end
+
   def sendMessage
-
-
     if params[:commit] == 'Send'
-      puts "========= url : " + @message.sent_to_url
-      puts "========= message : " + @message.message_txt
+      begin
 
-      uri = URI.parse @message.sent_to_url
+        @response = OpenStruct.new
+        @response.message = formatXML(@message.message_txt)
 
-      http = Net::HTTP.new(uri.host, uri.port)
+        uri = URI.parse @message.sent_to_url
 
-      req = Net::HTTP::Post.new(uri.request_uri)
-      req.body = @message.message_txt
-      req.content_type = 'text/xml'
+        http = Net::HTTP.new(uri.host, uri.port)
 
-      response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request req}
+        req = Net::HTTP::Post.new(uri.request_uri)
+        req.body = @message.message_txt
+        req.content_type = 'text/xml'
 
-      flash[:success] = "Request saved. Send not implemented"
-      redirect_to vendor_request_message_index_path
+        reply = Net::HTTP.new(uri.host, uri.port).start { |http| http.request req}
+
+
+        @response.code = reply.code
+        @response.body = formatXML(reply.body)
+
+        @page_title = 'Results'
+
+        render :results
+      rescue => e
+        flash.now[:error] = "Request failed : " + e.message
+        @response.code = "No Results"
+        @response.body = "No Results"
+        render :results
+      end
     else
       redirect_to vendor_request_message_index_path
     end
