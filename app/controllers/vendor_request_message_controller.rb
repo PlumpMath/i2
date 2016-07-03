@@ -2,7 +2,7 @@ class VendorRequestMessageController < ApplicationController
 
   layout "vendor_request_message"
 
-  require "rexml/document" 
+  require "rexml/document"
   require 'ostruct'
 
   def index
@@ -60,10 +60,8 @@ class VendorRequestMessageController < ApplicationController
   end
 
   def sendRequest
-    byebug
-    @page_title = 'Send Request Message'
     @message = VendorRequestMessage.find(params[:id])
-    render :send
+    sendMessage
   end
 
 
@@ -82,38 +80,32 @@ class VendorRequestMessageController < ApplicationController
   end
 
   def sendMessage
-    if params[:commit] == 'Send'
-      begin
 
-        @response = OpenStruct.new
-        @response.message = formatXML(@message.message_txt)
+    @response = OpenStruct.new
+    @response.message = formatXML(@message.message_txt)
 
-        uri = URI.parse @message.sent_to_url
+    uri = URI.parse @message.sent_to_url
 
-        http = Net::HTTP.new(uri.host, uri.port)
+    http = Net::HTTP.new(uri.host, uri.port)
 
-        req = Net::HTTP::Post.new(uri.request_uri)
-        req.body = @message.message_txt
-        req.content_type = 'text/xml'
+    req = Net::HTTP::Post.new(uri.request_uri)
+    req.body = @message.message_txt
+    req.content_type = 'text/xml'
 
-        reply = Net::HTTP.new(uri.host, uri.port).start { |http| http.request req}
+    reply = Net::HTTP.new(uri.host, uri.port).start { |http| http.request req}
 
 
-        @response.code = reply.code
-        @response.body = formatXML(reply.body)
+    @response.code = reply.code
+    @response.body = formatXML(reply.body)
 
-        @page_title = 'Results'
+    @page_title = 'Results'
 
-        render :results
-      rescue => e
-        flash.now[:error] = "Request failed : " + e.message
-        @response.code = "No Results"
-        @response.body = "No Results"
-        render :results
-      end
-    else
-      redirect_to vendor_request_message_index_path
-    end
+    render :results
+  rescue => e
+    flash.now[:error] = "Request failed : " + e.message
+    @response.code = "No Results"
+    @response.body = "No Results"
+    render :results
   end
 
 
