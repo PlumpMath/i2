@@ -9,6 +9,7 @@ class MessageLogController < ApplicationController
 
   def show
     @log = MessageLog.find(params[:id])
+    @log.payload
   end
 
   def destroy
@@ -34,6 +35,7 @@ class MessageLogController < ApplicationController
 			   and package_group.package_id = package.package_id
 			   and message.package_group_id = package_group.package_group_id
 			   and message_log.message_id = message.message_id
+         order by message_log.message_log_id desc
 		])
   end
 

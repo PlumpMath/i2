@@ -68,21 +68,10 @@ class VendorRequestMessageController < ApplicationController
 
   private
 
-  def formatXML(message)
-    response = "";
-
-    doc = REXML::Document.new(message)
-    formatter = REXML::Formatters::Pretty.new
-    formatter.compact = true
-
-    formatter.write(doc, response)
-    return response
-  end
-
   def sendMessage
 
     @response = OpenStruct.new
-    @response.message = formatXML(@message.message_txt)
+    @response.message = @message.message_txt
 
     uri = URI.parse @message.sent_to_url
 
@@ -96,7 +85,7 @@ class VendorRequestMessageController < ApplicationController
 
 
     @response.code = reply.code
-    @response.body = formatXML(reply.body)
+    @response.body = reply.body
 
     @page_title = 'Results'
 
