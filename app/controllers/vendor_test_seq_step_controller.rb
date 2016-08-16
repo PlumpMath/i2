@@ -19,8 +19,6 @@ class VendorTestSeqStepController < ApplicationController
 		redirect_to edit_vendor_test_sequence_path(:id => @step.test_sequence_id)
 	end
 
-
-
 	def show
 		#@step = TestSeqStep.find(params[:id])
 		#@pkg = my_packages
@@ -41,10 +39,9 @@ class VendorTestSeqStepController < ApplicationController
 
 	def update
 		@step = VendorTestSeqStep.find(params[:id])
-
 		if @step.update_attributes(step_params)
 			flash[:success] = "Vendor Test Sequence Step updated"
-			redirect_to edit_vendor_test_sequence_path(:id => @step.test_sequence_id)
+			redirect_to edit_vendor_test_sequence_path(:id => @step.vendor_test_sequences_id)
 		else
 			rendor :edit
 		end
@@ -59,6 +56,6 @@ class VendorTestSeqStepController < ApplicationController
 	end
 
 	def step_params
-		params.require(:test_seq_step).permit(:out_url)
+		params.require(:vendor_test_seq_step).permit(:out_url)
 	end
 end

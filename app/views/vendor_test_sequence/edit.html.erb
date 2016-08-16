@@ -24,18 +24,26 @@
   </div>
   <div class="field-unit field-unit--string">
     <div class="field-unit__label">
-      <%= f.label 'Type' %>
+      <%= f.label 'Comment' %>
     </div>
     <div class="field-unit__field">
-      <%= f.text_field :type, value: @test.test_sequence.type, :readonly => true %>
+      <%= f.text_field :comment, value: @test.comment %>
     </div>
   </div>
   <div class="field-unit field-unit--string">
     <div class="field-unit__label">
-      <%= f.label 'vendor_url'%>
+      <%= f.label 'Type' %>
     </div>
     <div class="field-unit__field">
-      <%= f.text_field :vendor_url, value: @vendor_url %>
+      <%= f.text_area :type, value: @test.test_sequence.type%>
+    </div>
+  </div>
+  <div class="field-unit field-unit--string">
+    <div class="field-unit__label">
+      <%= f.label :user_id%>
+    </div>
+    <div class="field-unit__field test_seq_step_field-unit__field">
+      <%= f.select :user_id, User.where(vendor_id: @user.vendor_id).collect {|x| [ x.name, x.id ]} %>
     </div>
   </div>
   <div class="field-unit field-unit--string">
@@ -49,5 +57,5 @@
   <div class="form-actions">
     <%= f.submit %>
   </div>
-  <%#= render "edit_collection",  test: @test %>
+  <%= render "edit_collection",  test: @test %>
 <% end %>

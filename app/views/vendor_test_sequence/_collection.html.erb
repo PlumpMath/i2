@@ -4,6 +4,7 @@
       <th>ID</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Comment</th>
       <th>Type</th>
       <th>Async</th>
       <th></th>
@@ -17,7 +18,8 @@
           >
           <td><%= test.id %></td>
           <td><%= test.test_sequence.name %></td>
-          <td><%= test.test_sequence.description %></td>
+          <td><%= truncate(test.test_sequence.description, :length => 50)%></td>
+          <td><%= truncate(test.comment, :length => 25)%></td>
           <td><%= test.test_sequence.type %></td>
           <td><%= test.asynch_flag %></td>
           <td><%= link_to(

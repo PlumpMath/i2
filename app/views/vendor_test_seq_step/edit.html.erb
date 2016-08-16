@@ -2,15 +2,7 @@
 <%= form_for @step do |f| %>
   <div class="field-unit field-unit--string">
     <div class="field-unit__label">
-      <%= f.label 'Other Vendor URL' %>
-    </div>
-    <div class="field-unit__field test_seq_step_field-unit__field">
-      <%= f.text_field :out_url %>
-    </div>
-  </div>
-  <div class="field-unit field-unit--string">
-    <div class="field-unit__label">
-      <%= f.label 'ESB URL' %>
+      <%= f.label 'Default ESB URL' %>
     </div>
     <div class="field-unit__field">
       <%= f.text_field :esb_url, value: @step.test_seq_step.esb_url, :readonly => true %>
@@ -18,7 +10,7 @@
   </div>
   <div class="field-unit field-unit--string">
     <div class="field-unit__label">
-      <%= f.label 'Harness URL' %>
+      <%= f.label 'Default Harness URL (ro)' %>
     </div>
     <div class="field-unit__field">
       <%= f.text_field :harness_url, value: @step.test_seq_step.harness_url, :readonly => true %>
@@ -26,10 +18,10 @@
   </div>
   <div class="field-unit field-unit--string">
     <div class="field-unit__label">
-      <%= f.label 'Swap Corrid Flag' %>
+      <%= f.label 'Other Vendor URL' %>
     </div>
-    <div class="field-unit__field">
-      <%= f.check_box :swap_corrid_flag, value: @step.test_seq_step.swap_corrid_flag, :readonly => true %>
+    <div class="field-unit__field test_seq_step_field-unit__field">
+      <%= f.text_field :out_url %>
     </div>
   </div>
   <div class="form-actions">
