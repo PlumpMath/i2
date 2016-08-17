@@ -2,7 +2,7 @@
 <header class="header">
   <h1 class="header__heading" id="page-title"><%= content_for(:title) %></h1>
   <div class="header__actions">
-    <td><%= link_to 'Back', :back, class: "button" %></td>
+    <td><%= link_to 'Back', vendor_test_sequence_index_path(), class: "button" %></td>
   </div>
 </header>
 <%= form_for @test do |f| %>
