@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 	resources :vendor_test_sequence
 	resources :vendor_test_seq_step
 	resources :message_log
+	resources :request_log
 
 	get 'vendor_request_message/:id/sendRequest' => 'vendor_request_message#sendRequest', as: 'sendRequest_vendor_request_message'
 	get 'vendor_request_message/results' => 'vendor_request_message#results'

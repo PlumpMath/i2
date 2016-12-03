@@ -57,6 +57,12 @@ sub {
     padding: 10px;
 }
 
+.request_log_message {
+    max-width: 300px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
 .header .site_title {
     position: absolute;
     left: 0;
